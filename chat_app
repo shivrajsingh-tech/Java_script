@@ -1,1 +1,189 @@
 // I here is my first practise project that is chat app  grow more and learn more.... 
+
+// THE HTML CODE ...
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>chat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen">
+
+  <!-- App Container -->
+  <div class="w-full h-full flex items-center justify-center bg-[#e5ddd5]">
+
+    <!-- Chat Box -->
+    <div class="w-full max-w-md h-full md:h-[700px] bg-white flex flex-col shadow-lg rounded-lg">
+
+      <!-- Header -->
+      <div
+        class="bg-blue-600 text-white p-4 flex items-center justify-between rounded-t-lg"
+      >
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center font-bold text-gray-400">
+            S
+          </div>
+          <div>
+            <h2 class="font-semibold">Shinu ❤️</h2>
+            <p id="statusText" class="text-sm text-green-100">online</p>
+          </div>
+        </div>
+
+        <button
+          id="toggleStatusBtn"
+          class="bg-white text-green-600 px-3 py-1 rounded-full text-sm font-semibold"
+        >
+          Go Offline
+        </button>
+      </div>
+
+      <!-- Chat Area -->
+      <div
+        id="chatArea"
+        class="flex-1 p-4 space-y-4 overflow-y-auto"
+        style="background-image: url('https://i.imgur.com/5rLR6Gd.png'); background-size: cover;"
+      >
+      </div>
+
+      <!-- Footer -->
+      <div class="p-3 flex flex-col gap-2 border-t bg-gray-100 rounded-b-lg">
+
+        <div class="flex items-center gap-2">
+          <input
+            id="messageInput"
+            type="text"
+            placeholder="Type a message"
+            class="flex-1 border rounded-full px-4 py-2 focus:outline-none"
+          />
+          <button
+            id="sendBtn"
+            class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-200 transition"
+          >
+            Send
+          </button>
+        </div>
+
+        <p class="text-sm text-gray-600">
+          Messages sent: <span id="messageCount">0</span>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+// THE JAVASCRIPT CODE 
+
+
+let usernamehtml = document.querySelector("h2"); 
+let toggleBtn = document.getElementById("toggleStatusBtn");
+let contentmsghtml = document.getElementById("chatArea");
+let inputboxmsgcontenthtml = document.getElementById("messageInput");
+let sendbtnhtml = document.getElementById("sendBtn");
+let statushtml = document.getElementById("statusText");
+let msgCountHtml = document.getElementById("messageCount");
+
+function chatSession(username) {
+  let isOnline = true;   
+  let isTyping = false;
+  let messageCount = 0;
+
+  usernamehtml.innerText = username;
+
+  function addSystemMsg(text) {
+    contentmsghtml.innerHTML += `
+      <div class="text-center text-xs text-gray-400">${text}</div>
+    `;
+  }
+
+  function addUserMsg(text) {
+    contentmsghtml.innerHTML += `
+      <div class="flex justify-end">
+        <div class="bg-blue-500 text-white px-3 py-2 rounded-lg max-w-[70%] text-sm">
+          <p>${text}</p>
+        </div>
+      </div>
+    `;
+    
+  }
+
+  return {
+    toggleStatus() {
+      
+      isOnline = !isOnline;
+
+      if (isOnline) {
+        statushtml.innerText = "online";
+        statushtml.className = "text-sm text-green-100";
+        toggleBtn.innerText = "Go Offline";
+        toggleBtn.className = "bg-white text-green-600 px-3 py-1 rounded-full text-sm font-semibold";
+        addSystemMsg(`${username} is online`);
+      } else {
+        statushtml.innerText = "offline";
+        statushtml.className = "text-sm text-red-200";
+        toggleBtn.innerText = "Go Online";
+        toggleBtn.className = "bg-white text-red-600 px-3 py-1 rounded-full text-sm font-semibold";
+        addSystemMsg(`${username} is offline`);
+      }
+    },
+
+    startTyping() {
+      if (!isOnline || isTyping) return;
+      isTyping = true;
+      statushtml.innerText = "typing...";
+    },
+
+    stopTyping() {
+      if (!isTyping || !isOnline) return;
+      isTyping = false;
+      statushtml.innerText = "online";
+    },
+
+    sendMessage(message) {
+      if (!isOnline) {
+        addSystemMsg("You are offline. Message not sent.");
+        return;
+      }
+
+      if (message.trim() === "") {
+        addSystemMsg("Empty message not sent.");
+        return;
+      }
+
+      messageCount++;
+      msgCountHtml.innerText = messageCount;
+      addUserMsg(message);
+      inputboxmsgcontenthtml.value = "";
+    }
+  };
+}
+
+let shinu = chatSession("Shinu ❤️");
+//domm
+
+toggleBtn.addEventListener("click", () => shinu.toggleStatus());
+
+inputboxmsgcontenthtml.addEventListener("focus", () => shinu.startTyping());
+inputboxmsgcontenthtml.addEventListener("blur", () => shinu.stopTyping());
+
+sendbtnhtml.addEventListener("click", () => {
+  shinu.sendMessage(inputboxmsgcontenthtml.value);
+});
+
+inputboxmsgcontenthtml.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    shinu.sendMessage(inputboxmsgcontenthtml.value);
+  }
+});
+
