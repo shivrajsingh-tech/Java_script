@@ -1,1 +1,70 @@
+// THEIR IS A COUNTER BUTTON WHICH SETS A LIMIT TO DEACREMENT AND INCREMENT AND RESET IT TO ZERO...
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Counter App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
+<body class="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col">
+
+  <h2 class="text-center text-yellow-400 font-extrabold text-4xl p-6 tracking-wide">
+   Button Counter App
+  </h2>
+
+  <div class="flex flex-1 justify-center items-center">
+    <div class="bg-white/10 backdrop-blur-lg border border-white/20 
+                rounded-3xl p-10 shadow-2xl shadow-black/50">
+
+      <div class="flex items-center gap-12">
+
+        <!-- Decrement Status -->
+        <div class="text-white font-semibold text-2xl transition-all duration-300">
+          <h2 id="text_dec">Decrement</h2>
+        </div>
+
+        <!-- Counter Box -->
+        <div class="text-center space-y-4">
+
+          <div class="flex items-center bg-white rounded-xl overflow-hidden shadow-lg">
+
+            <button id="btn1_dec"
+              class="w-14 h-12 text-2xl font-bold bg-red-500 text-white hover:bg-red-600 transition">
+              -
+            </button>
+
+            <h2 id="data1"
+              class="w-40 text-xl font-bold flex justify-center items-center bg-gray-100">
+              0
+            </h2>
+
+            <button id="btn1_incr"
+              class="w-14 h-12 text-2xl font-bold bg-green-500 text-white hover:bg-green-600 transition">
+              +
+            </button>
+
+          </div>
+
+          <button id="reset1"
+            class="px-6 py-2 rounded-full bg-yellow-400 text-black font-bold 
+                   hover:bg-yellow-500 transition shadow-md">
+            RESET
+          </button>
+
+        </div>
+
+        <!-- Increment Status -->
+        <div class="text-white font-semibold text-2xl transition-all duration-300">
+          <h2 id="text_incr">Increment</h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script src="counterbtn.js"></script>
+
+</body>
+
+</html>
