@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Counter App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col">
+
+  <div class="flex flex-wrap gap-10 p-20 mt-10">
+    <!-- 1 -->
+    <div class="bg-white rounded-3xl p-10 shadow-2xl flex items-center gap-6">
+      <div class="bg-gray-100 p-2">
+        Card Clicked : <span id="times1">0</span>
+      </div>
+      <button id="btn1_dec" class="w-14 h-12 text-2xl font-bold bg-red-500 text-white">-</button>
+      <h2 id="data1" class="w-20 text-xl font-bold text-center">0</h2>
+      <button id="btn1_incr" class="w-14 h-12 text-2xl font-bold bg-green-500 text-white">+</button>
+    </div>
+
+    <!-- 2 -->
+    <div class="bg-white rounded-3xl p-10 shadow-2xl flex items-center gap-6">
+      <div class="bg-gray-100 p-2">
+        Card Clicked : <span id="times2">0</span>
+      </div>
+      <button id="btn2_dec" class="w-14 h-12 text-2xl font-bold bg-red-500 text-white">-</button>
+      <h2 id="data2" class="w-20 text-xl font-bold text-center">0</h2>
+      <button id="btn2_incr" class="w-14 h-12 text-2xl font-bold bg-green-500 text-white">+</button>
+    </div>
+
+    <!-- 3 -->
+    <div class="bg-white rounded-3xl p-10 shadow-2xl flex items-center gap-6">
+      <div class="bg-gray-100 p-2">
+        Card Clicked : <span id="times3">0</span>
+      </div>
+      <button id="btn3_dec" class="w-14 h-12 text-2xl font-bold bg-red-500 text-white">-</button>
+      <h2 id="data3" class="w-20 text-xl font-bold text-center">0</h2>
+      <button id="btn3_incr" class="w-14 h-12 text-2xl font-bold bg-green-500 text-white">+</button>
+    </div>
+
+    <!-- 4 -->
+    <div class="bg-white rounded-3xl p-10 shadow-2xl flex items-center gap-6">
+      <div class="bg-gray-100 p-2">
+        Card Clicked : <span id="times4">0</span>
+      </div>
+      <button id="btn4_dec" class="w-14 h-12 text-2xl font-bold bg-red-500 text-white">-</button>
+      <h2 id="data4" class="w-20 text-xl font-bold text-center">0</h2>
+      <button id="btn4_incr" class="w-14 h-12 text-2xl font-bold bg-green-500 text-white">+</button>
+    </div>
+
+    <!-- 5 -->
+    <div class="bg-white rounded-3xl p-10 shadow-2xl flex items-center gap-6">
+      <div class="bg-gray-100 p-2">
+        Card Clicked : <span id="times5">0</span>
+      </div>
+      <button id="btn5_dec" class="w-14 h-12 text-2xl font-bold bg-red-500 text-white">-</button>
+      <h2 id="data5" class="w-20 text-xl font-bold text-center">0</h2>
+      <button id="btn5_incr" class="w-14 h-12 text-2xl font-bold bg-green-500 text-white">+</button>
+    </div>
+
+    <!-- 6 -->
+    <div class="bg-white rounded-3xl p-10 shadow-2xl flex items-center gap-6">
+      <div class="bg-gray-100 p-2">
+        Card Clicked : <span id="times6">0</span>
+      </div>
+      <button id="btn6_dec" class="w-14 h-12 text-2xl font-bold bg-red-500 text-white">-</button>
+      <h2 id="data6" class="w-20 text-xl font-bold text-center">0</h2>
+      <button id="btn6_incr" class="w-14 h-12 text-2xl font-bold bg-green-500 text-white">+</button>
+    </div>
+
+  </div>
+
+<script>
+
+function Counter(start, Id, times) {
+  let count = start;
+  let times = 0;
+
+  return {
+    increment() {
+      count++;
+      times++;
+      document.getElementById(Id).innerText = count;
+      document.getElementById(times).innerText = times;
+    },
+    decrement() {
+      count--;
+      times++;
+      document.getElementById(Id).innerText = count;
+      document.getElementById(times).innerText = times;
+    }
+  };
+}
+
+// Create counters
+let c1 = Counter(0,"data1","times1");
+let c2 = Counter(0,"data2","times2");
+let c3 = Counter(0,"data3","times3");
+let c4 = Counter(0,"data4","times4");
+let c5 = Counter(0,"data5","times5");
+let c6 = Counter(0,"data6","times6");
+
+// Button connections
+document.getElementById("btn1_incr").onclick = () => c1.increment();
+document.getElementById("btn1_dec").onclick  = () => c1.decrement();
+
+document.getElementById("btn2_incr").onclick = () => c2.increment();
+document.getElementById("btn2_dec").onclick  = () => c2.decrement();
+
+document.getElementById("btn3_incr").onclick = () => c3.increment();
+document.getElementById("btn3_dec").onclick  = () => c3.decrement();
+
+document.getElementById("btn4_incr").onclick = () => c4.increment();
+document.getElementById("btn4_dec").onclick  = () => c4.decrement();
+
+document.getElementById("btn5_incr").onclick = () => c5.increment();
+document.getElementById("btn5_dec").onclick  = () => c5.decrement();
+
+document.getElementById("btn6_incr").onclick = () => c6.increment();
+document.getElementById("btn6_dec").onclick  = () => c6.decrement();
+
+</script>
+
+</body>
+</html>
